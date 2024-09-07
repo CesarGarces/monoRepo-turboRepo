@@ -22,8 +22,8 @@ export const usePopups = () => {
         title,
         content,
         position: {
-          x: Math.random() * (width - 100),
-          y: Math.random() * (height - 100),
+          x: Math.random() * (width - 300),
+          y: Math.random() * (height - 300),
         },
         zIndex: maxZIndex,
       };

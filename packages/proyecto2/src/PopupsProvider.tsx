@@ -77,7 +77,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       onMouseDown={handleMouseDown}
     >
       <div className="popup-header">
-        <h3 className="popup-title">{title}</h3>
+        <h3 className="popup-title">Title: {title}</h3>
         <button className="popup-close-button" onClick={(e) => {
           e.stopPropagation();
           onClose(id);
