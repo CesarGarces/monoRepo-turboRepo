@@ -5,10 +5,12 @@ interface PopupProps {
   id: string;
   onClose: (id: string) => void;
   initialPosition: { x: number; y: number };
-  zIndex: number
-  isActive: boolean
-  onActivate: (id: string) => void
-  parentRef: RefObject<HTMLDivElement>
+  zIndex: number;
+  isActive: boolean;
+  onActivate: (id: string) => void;
+  parentRef: RefObject<HTMLDivElement>;
+  title: string;
+  content: string;
 }
 
 const PopupsProvider: React.FC<PopupProps> = ({
@@ -18,52 +20,54 @@ const PopupsProvider: React.FC<PopupProps> = ({
   zIndex,
   isActive,
   onActivate,
-  parentRef
+  parentRef,
+  title,
+  content
 }) => {
-  const [position, setPosition] = useState(initialPosition)
-  const [isDragging, setIsDragging] = useState(false)
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 })
-  const popupRef = useRef<HTMLDivElement>(null)
+  const [position, setPosition] = useState(initialPosition);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const popupRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging && popupRef.current && parentRef.current) {
-        const parentRect = parentRef.current.getBoundingClientRect()
-        const { width, height } = popupRef.current.getBoundingClientRect()
-        const newX = Math.min(Math.max(e.clientX - parentRect.left - dragStart.x, 0), parentRect.width - width)
-        const newY = Math.min(Math.max(e.clientY - parentRect.top - dragStart.y, 0), parentRect.height - height)
-        setPosition({ x: newX, y: newY })
+        const parentRect = parentRef.current.getBoundingClientRect();
+        const { width, height } = popupRef.current.getBoundingClientRect();
+        const newX = Math.min(Math.max(e.clientX - parentRect.left - dragStart.x, 0), parentRect.width - width);
+        const newY = Math.min(Math.max(e.clientY - parentRect.top - dragStart.y, 0), parentRect.height - height);
+        setPosition({ x: newX, y: newY });
       }
-    }
+    };
 
     const handleMouseUp = () => {
-      setIsDragging(false)
+      setIsDragging(false);
       onActivate(null);
-    }
+    };
 
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove)
-      document.addEventListener('mouseup', handleMouseUp)
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
     }
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-    }
-  }, [isDragging, dragStart, parentRef])
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragStart, parentRef]);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (popupRef.current && parentRef.current) {
-      const parentRect = parentRef.current.getBoundingClientRect()
-      const popupRect = popupRef.current.getBoundingClientRect()
+      const parentRect = parentRef.current.getBoundingClientRect();
+      const popupRect = popupRef.current.getBoundingClientRect();
       setDragStart({
         x: e.clientX - parentRect.left - popupRect.left + parentRect.left,
         y: e.clientY - parentRect.top - popupRect.top + parentRect.top
-      })
-      setIsDragging(true)
-      onActivate(id)
+      });
+      setIsDragging(true);
+      onActivate(id);
     }
-  }
+  };
 
   return (
     <div
@@ -73,7 +77,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       onMouseDown={handleMouseDown}
     >
       <div className="popup-header">
-        <h3 className="popup-title">Popup</h3>
+        <h3 className="popup-title">{title}</h3>
         <button className="popup-close-button" onClick={(e) => {
           e.stopPropagation();
           onClose(id);
@@ -83,7 +87,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       </div>
       <hr className="popup-divider" />
       <div className="popup-content">
-        <p>Contenido del popup</p>
+        <p>{content}</p>
       </div>
     </div>
   );

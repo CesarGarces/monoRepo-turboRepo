@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./PopupsProvider": "./src/PopupsProvider.tsx"
+    "./PopupsProvider": "./src/PopupsProvider.tsx",
+    "./usePopups": "./src/hooks/usePopups.ts",
+    "./componenteA": "./src/components/componenteA.tsx",
+    "./componenteB": "./src/components/componenteB.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
