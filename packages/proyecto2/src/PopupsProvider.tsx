@@ -7,7 +7,7 @@ interface PopupProps {
   initialPosition: { x: number; y: number };
   zIndex: number;
   isActive: boolean;
-  onActivate: (id: string) => void;
+  onActivate: (id: string | null) => void;
   parentRef: RefObject<HTMLDivElement>;
   title: string;
   content: string;
@@ -41,8 +41,10 @@ const PopupsProvider: React.FC<PopupProps> = ({
     };
 
     const handleMouseUp = () => {
-      setIsDragging(false);
-      onActivate(null);
+      if (isDragging) {
+        setIsDragging(false);
+        onActivate(null);
+      }
     };
 
     if (isDragging) {
@@ -54,7 +56,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, dragStart, parentRef]);
+  }, [isDragging, dragStart, parentRef, onActivate]);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (popupRef.current && parentRef.current) {
@@ -73,7 +75,11 @@ const PopupsProvider: React.FC<PopupProps> = ({
     <div
       ref={popupRef}
       className={`popup-container ${isActive ? 'active' : ''}`}
-      style={{ left: `${position.x}px`, top: `${position.y}px`, zIndex: zIndex }}
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        zIndex: isActive ? 1000 : zIndex
+      }}
       onMouseDown={handleMouseDown}
     >
       <div className="popup-header">

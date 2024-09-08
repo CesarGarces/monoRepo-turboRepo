@@ -1,55 +1,15 @@
-import { useState, useRef } from "react";
-
-interface Popup {
-  id: string;
-  title: string;
-  content: string;
-  position: { x: number; y: number };
-  zIndex: number;
-}
+import { useRef } from "react";
+import usePopupsStore from "../usePopupsStore";
 
 export const usePopups = () => {
-  const [popups, setPopups] = useState<Popup[]>([]);
-  const [activePopupId, setActivePopupId] = useState<string | null>(null);
-  const [maxZIndex, setMaxZIndex] = useState(1);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const addPopup = (title: string, content: string) => {
-    if (containerRef.current) {
-      const { width, height } = containerRef.current.getBoundingClientRect();
-      const newPopup = {
-        id: crypto.randomUUID(),
-        title,
-        content,
-        position: {
-          x: Math.random() * (width - 300),
-          y: Math.random() * (height - 300),
-        },
-        zIndex: maxZIndex,
-      };
-      setPopups([...popups, newPopup]);
-      setMaxZIndex(maxZIndex + 1);
-    }
-  };
-
-  const closePopup = (id: string) => {
-    setPopups(popups.filter(popup => popup.id !== id));
-  };
-
-  const closeAll = () => {
-    setPopups([]);
-    setMaxZIndex(1);
-  };
-
-  const activatePopup = (id: string) => {
-    setActivePopupId(id);
-    setPopups(
-      popups.map(popup =>
-        popup.id === id ? { ...popup, zIndex: maxZIndex } : popup
-      )
-    );
-    setMaxZIndex(maxZIndex + 1);
-  };
+  const popups = usePopupsStore(state => state.popups);
+  const addPopup = usePopupsStore(state => state.addPopup);
+  const closePopup = usePopupsStore(state => state.closePopup);
+  const closeAll = usePopupsStore(state => state.closeAll);
+  const activatePopup = usePopupsStore(state => state.activatePopup);
+  const activePopupId = popups.find(popup => popup.isActive)?.id || null;
 
   return {
     popups,
