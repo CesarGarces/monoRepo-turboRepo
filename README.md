@@ -7,7 +7,7 @@ Este proyecto es un **monorepo** creado utilizando **Turborepo**. Contiene dos p
 ## Estructura del Monorepo
 
 - **Proyecto1**: Aplicación principal desarrollada en **React**.
-- **Proyecto2**: Biblioteca de componentes reutilizables que gestiona popups, utilizando **Zustand** como solución de estado global desarrollado en **React**.
+- **Proyecto2**: Biblioteca de componentes reutilizables que gestiona popups, utilizando **Zustand** como solución de estado global, desarrollado en **React**.
 
 ## Tecnologías Utilizadas
 
@@ -21,9 +21,6 @@ Este proyecto es un **monorepo** creado utilizando **Turborepo**. Contiene dos p
 - **Custom Hooks**: Hooks personalizados para manejar la lógica interna de los popups.
 - **Jest**: Para la implementación de **tests unitarios**.
 - **CI/CD**: Integración continua (CI) y entrega continua (CD) configuradas para garantizar despliegues automáticos y pruebas de calidad con Github ACtion y despliegue en vercel.
-
-## Instalación
-
 
 ## CI/CD
 El proyecto está configurado con CI/CD usando herramientas como GitHub Actions. Esto asegura que cada vez que se haga un push o pull request a la rama principal, se ejecuten automáticamente:
@@ -49,6 +46,7 @@ Los errores se reportarán automáticamente, bloqueando el despliegue hasta que 
 - Pruebas Unitarias: Cada funcionalidad está cubierta con tests unitarios para garantizar la calidad del código.
 - CI/CD: Implementación de CI/CD para mantener un flujo de trabajo automatizado y confiable.
 
+## Instalación
 1. Clona el repositorio.
 2. Instala las dependencias del proyecto:
 
