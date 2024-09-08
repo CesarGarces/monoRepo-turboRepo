@@ -18,7 +18,8 @@
     "lint": {
       "dependsOn": [
         "^lint"
-      ]
+      ],
+      "outputs": []
     },
     "dev": {
       "cache": false,
