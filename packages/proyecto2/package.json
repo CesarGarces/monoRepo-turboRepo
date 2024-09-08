@@ -9,6 +9,7 @@
     "./componenteB": "./src/components/componenteB.tsx"
   },
   "scripts": {
+    "test": "jest",
     "lint": "eslint . --max-warnings 0",
     "generate:component": "turbo gen react-component"
   },
