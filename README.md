@@ -1,4 +1,4 @@
-[![Deployment Pipeline](https://github.com/CesarGarces/monoRepo-turboRepo/actions/workflows/ci.yml/badge.svg?branch=main&event=deployment_status)](https://github.com/CesarGarces/monoRepo-turboRepo/actions/workflows/ci.yml)
+[![Deployment Pipeline](https://github.com/CesarGarces/monoRepo-turboRepo/actions/workflows/ci.yml/badge.svg)](https://github.com/CesarGarces/monoRepo-turboRepo/actions/workflows/ci.yml)
 
 # Monorepo con Turborepo
 
