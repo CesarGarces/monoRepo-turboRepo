@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useRef, RefObject, useEffect } from 'react';
 import './PopupStyle.css';
 
