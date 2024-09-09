@@ -33,5 +33,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "zustand": "^4.5.5"
-  }
+  },
+  "eslintIgnore": [
+    "src/jest.config.js"
+  ]
 }

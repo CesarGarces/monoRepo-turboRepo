@@ -15,7 +15,22 @@
         "!.next/cache/**"
       ]
     },
-    "test": {},
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "test": {
+      "dependsOn": [
+        "lint"
+      ],
+      "outputs": [
+        "coverage/**"
+      ]
+    },
     "dev": {
       "cache": false,
       "persistent": true
