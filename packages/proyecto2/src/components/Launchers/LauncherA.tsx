@@ -13,11 +13,9 @@ const LauncherA: React.FC<PopupProps> = ({ addPopup, styleButton }) => {
   };
 
   return (
-    <div>
-      <button className={styleButton} onClick={handleAddPopup}>
-        Add A
-      </button>
-    </div>
+    <button className={styleButton} onClick={handleAddPopup}>
+      Add A
+    </button>
   );
 };
 

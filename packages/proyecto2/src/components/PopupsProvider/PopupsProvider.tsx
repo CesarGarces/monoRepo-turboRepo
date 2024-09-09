@@ -100,7 +100,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
   const currentZIndex = popup?.zIndex ?? zIndex;
 
   return (
-    <div
+    <aside
       ref={popupRef}
       className={`popup-container ${isActive ? 'active' : ''}`}
       style={{
@@ -109,21 +109,28 @@ const PopupsProvider: React.FC<PopupProps> = ({
         zIndex: currentZIndex // Usa el zIndex del popup
       }}
       onMouseDown={handleMouseDown}
+      role="dialog"
+      aria-labelledby={`popup-title-${id}`} // Usa el id del popup
+      aria-modal="true" // Indica que el popup es modal
     >
-      <div className="popup-header">
-        <h3 className="popup-title">Title: {title}</h3>
-        <button className="popup-close-button" onClick={(e) => {
-          e.stopPropagation();
-          onClose(id);
-        }}>
+      <header className="popup-header">
+        <h3 id={`popup-title-${id}`} className="popup-title">Title: {title}</h3>
+        <button
+          className="popup-close-button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onClose(id);
+          }}
+          aria-label="Close popup"
+        >
           X
         </button>
-      </div>
+      </header>
       <hr className="popup-divider" />
-      <div className="popup-content">
+      <main className="popup-content">
         {content}
-      </div>
-    </div>
+      </main>
+    </aside>
   );
 };
 

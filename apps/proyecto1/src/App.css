@@ -17,12 +17,14 @@
 .popup-wrapper {
   position: relative;
   width: 80%;
+  max-width: 1200px;
   min-height: 80vh;
   background-color: #ffffff;
   border: 2px solid #d1d5db;
   border-radius: 8px;
   padding: 10px;
   box-sizing: border-box;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {
@@ -61,4 +63,10 @@
 
 .button:hover {
   background-color: #2d3748;
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 16px;
 }

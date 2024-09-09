@@ -17,17 +17,21 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Suspense fallback={<div>Loading...</div>}>
-        <div ref={containerRef} className="popup-wrapper">
-          <div className="button-group">
+      <Suspense fallback={<p>Loading...</p>}>
+        <header className="header">
+          <p>Prueba técnica 09/09/2024 - React - Cesar Garcés</p>
+          <p>Popups: {popups.length}</p>
+        </header>
+        <main ref={containerRef} className="popup-wrapper">
+          <section className="button-group">
             <LauncherA styleButton="button" addPopup={addPopup} />
             <LauncherB styleButton="button" addPopup={addPopup} />
             <button className="button" onClick={closeAll}>
               Cerrar Todos
             </button>
-          </div>
+          </section>
           {popups.map((popup) => (
-            <Suspense key={popup.id} fallback={<div>Loading Popup...</div>}>
+            <Suspense key={popup.id} fallback={<p>Loading Popup...</p>}>
               <PopupsProvider
                 id={popup.id}
                 onClose={() => closePopup(popup.id)}
@@ -39,7 +43,7 @@ const App: React.FC = () => {
               />
             </Suspense>
           ))}
-        </div>
+        </main>
       </Suspense>
     </div>
   );
