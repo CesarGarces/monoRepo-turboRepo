@@ -13,7 +13,6 @@ const App: React.FC = () => {
     addPopup,
     closePopup,
     closeAll,
-    activatePopup,
   } = usePopups();
 
   return (
@@ -34,7 +33,6 @@ const App: React.FC = () => {
                 onClose={() => closePopup(popup.id)}
                 initialPosition={popup.position}
                 zIndex={popup.zIndex}
-                onActivate={() => activatePopup(popup.id)}
                 parentRef={containerRef}
                 title={popup.title}
                 content={popup.content}

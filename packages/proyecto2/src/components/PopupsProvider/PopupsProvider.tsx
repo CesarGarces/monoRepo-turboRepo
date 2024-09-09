@@ -8,7 +8,6 @@ interface PopupProps {
   onClose: (id: string) => void;
   initialPosition: { x: number; y: number };
   zIndex: number;
-  onActivate: (id: string | null) => void;
   parentRef: RefObject<HTMLDivElement>;
   title: string;
   content: ReactNode;
@@ -19,7 +18,6 @@ const PopupsProvider: React.FC<PopupProps> = ({
   onClose,
   initialPosition,
   zIndex,
-  onActivate,
   parentRef,
   title,
   content
