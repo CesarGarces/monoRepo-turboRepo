@@ -15,12 +15,6 @@
         "!.next/cache/**"
       ]
     },
-    "lint": {
-      "dependsOn": [
-        "^lint"
-      ],
-      "outputs": []
-    },
     "test": {},
     "dev": {
       "cache": false,
