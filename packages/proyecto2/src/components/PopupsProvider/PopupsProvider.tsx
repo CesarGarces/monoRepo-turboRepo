@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useState, useRef, RefObject, useEffect, ReactNode } from 'react';
+import usePopupsStore from '../../store/usePopupsStore';
 import './PopupStyle.css';
 
 interface PopupProps {
@@ -7,7 +8,6 @@ interface PopupProps {
   onClose: (id: string) => void;
   initialPosition: { x: number; y: number };
   zIndex: number;
-  isActive: boolean;
   onActivate: (id: string | null) => void;
   parentRef: RefObject<HTMLDivElement>;
   title: string;
@@ -19,7 +19,6 @@ const PopupsProvider: React.FC<PopupProps> = ({
   onClose,
   initialPosition,
   zIndex,
-  isActive,
   onActivate,
   parentRef,
   title,
@@ -29,6 +28,11 @@ const PopupsProvider: React.FC<PopupProps> = ({
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const popupRef = useRef<HTMLDivElement>(null);
+  const { popups, activatePopup, setZIndex } = usePopupsStore(state => ({
+    popups: state.popups,
+    activatePopup: state.activatePopup,
+    setZIndex: state.setZIndex,
+  }));
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -44,7 +48,8 @@ const PopupsProvider: React.FC<PopupProps> = ({
     const handleMouseUp = () => {
       if (isDragging) {
         setIsDragging(false);
-        onActivate(null);
+        activatePopup(null);
+        setZIndex(id, zIndex); // Restablece el zIndex original después de arrastrar
       }
     };
 
@@ -57,7 +62,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, dragStart, parentRef, onActivate]);
+  }, [isDragging, dragStart, parentRef, activatePopup, setZIndex, id, zIndex]);
 
   const handleMouseDown: React.MouseEventHandler<HTMLDivElement> = (e) => {
     if (popupRef.current && parentRef.current) {
@@ -68,9 +73,14 @@ const PopupsProvider: React.FC<PopupProps> = ({
         y: e.clientY - parentRect.top - popupRect.top + parentRect.top
       });
       setIsDragging(true);
-      onActivate(id);
+      activatePopup(id); // Usa activatePopup del store
     }
   };
+
+  // Encuentra el popup correspondiente en el estado del store
+  const popup = popups.find(popup => popup.id === id);
+  const isActive = popup?.isActive ?? false;
+  const currentZIndex = popup?.zIndex ?? zIndex;
 
   return (
     <div
@@ -79,7 +89,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       style={{
         left: `${position.x}px`,
         top: `${position.y}px`,
-        zIndex: isActive ? 1000 : zIndex
+        zIndex: currentZIndex // Usa el zIndex del popup
       }}
       onMouseDown={handleMouseDown}
     >

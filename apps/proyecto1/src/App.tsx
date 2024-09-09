@@ -9,7 +9,6 @@ const LauncherA = lazy(() => import("@repo/proyecto2/LauncherA"));
 const App: React.FC = () => {
   const {
     popups,
-    activePopupId,
     containerRef,
     addPopup,
     closePopup,
@@ -35,7 +34,6 @@ const App: React.FC = () => {
                 onClose={() => closePopup(popup.id)}
                 initialPosition={popup.position}
                 zIndex={popup.zIndex}
-                isActive={activePopupId === popup.id}
                 onActivate={() => activatePopup(popup.id)}
                 parentRef={containerRef}
                 title={popup.title}
