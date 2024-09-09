@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-
+import PopupContainerB from "../PopupContainers/PopupContainerB";
 interface PopupProps {
   // eslint-disable-next-line no-unused-vars
   addPopup: (title: string, content: ReactNode) => void;
@@ -8,7 +8,7 @@ interface PopupProps {
 
 const LauncherB: React.FC<PopupProps> = ({ addPopup, styleButton }) => {
   const handleAddPopup = () => {
-    addPopup("Popup B", "Este es un texto");
+    addPopup("Popup B", <PopupContainerB />);
   };
 
   return (
