@@ -19,7 +19,7 @@ const App: React.FC = () => {
     <div className="App">
       <Suspense fallback={<p>Loading...</p>}>
         <header className="header">
-          <p>Prueba técnica 09/09/2024 - React - Cesar Garcés</p>
+          <p>Prueba técnica 09/09/2024 - React - César Garcés</p>
           <p>Popups: {popups.length}</p>
         </header>
         <main ref={containerRef} className="popup-wrapper">
