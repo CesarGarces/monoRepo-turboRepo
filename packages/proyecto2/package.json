@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./PopupsProvider": "./src/PopupsProvider.tsx",
+    "./PopupsProvider": "./src/components/PopupsProvider/PopupsProvider.tsx",
     "./usePopups": "./src/hooks/usePopups.ts",
-    "./componenteA": "./src/components/componenteA.tsx",
-    "./componenteB": "./src/components/componenteB.tsx"
+    "./LauncherA": "./src/components/Launchers/LauncherA.tsx",
+    "./LauncherB": "./src/components/Launchers/LauncherB.tsx"
   },
   "scripts": {
     "test": "jest",

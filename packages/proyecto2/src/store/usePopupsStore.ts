@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { create } from "zustand";
+import { ReactNode } from "react";
 
 export interface Popup {
   id: string;
@@ -7,12 +8,12 @@ export interface Popup {
   zIndex: number;
   isActive: boolean;
   title: string;
-  content: string;
+  content: ReactNode;
 }
 
 interface PopupsStore {
   popups: Popup[];
-  addPopup: (title: string, content: string) => void;
+  addPopup: (title: string, content: ReactNode) => void;
   closePopup: (id: string) => void;
   closeAll: () => void;
   activatePopup: (id: string) => void;
@@ -31,7 +32,7 @@ const usePopupsStore = create<PopupsStore>(set => ({
           y: getRandomPosition(300),
         },
         zIndex: state.popups.length + 1,
-        isActive: false, // Set to false initially
+        isActive: false,
         title,
         content,
       };

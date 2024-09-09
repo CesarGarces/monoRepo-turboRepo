@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import usePopupsStore from "../usePopupsStore";
+import usePopupsStore from "../store/usePopupsStore";
 
 export const usePopups = () => {
   const containerRef = useRef<HTMLDivElement>(null);

@@ -1,21 +1,23 @@
+import { ReactNode } from "react";
+
 interface PopupProps {
   // eslint-disable-next-line no-unused-vars
-  addPopup: (title: string, content: string) => void;
+  addPopup: (title: string, content: ReactNode) => void;
   styleButton: string;
 }
 
-const ComponenteA: React.FC<PopupProps> = ({ addPopup, styleButton }) => {
+const LauncherB: React.FC<PopupProps> = ({ addPopup, styleButton }) => {
   const handleAddPopup = () => {
-    addPopup("Popup A", "Component A");
+    addPopup("Popup B", "Este es un texto");
   };
 
   return (
     <div>
       <button className={styleButton} onClick={handleAddPopup}>
-        Add A
+        Add B
       </button>
     </div>
   );
 };
 
-export default ComponenteA;
+export default LauncherB;

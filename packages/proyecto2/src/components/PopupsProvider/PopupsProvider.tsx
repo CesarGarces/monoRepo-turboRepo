@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useRef, RefObject, useEffect } from 'react';
+import { useState, useRef, RefObject, useEffect, ReactNode } from 'react';
 import './PopupStyle.css';
 
 interface PopupProps {
@@ -11,7 +11,7 @@ interface PopupProps {
   onActivate: (id: string | null) => void;
   parentRef: RefObject<HTMLDivElement>;
   title: string;
-  content: string;
+  content: ReactNode;
 }
 
 const PopupsProvider: React.FC<PopupProps> = ({
@@ -94,7 +94,7 @@ const PopupsProvider: React.FC<PopupProps> = ({
       </div>
       <hr className="popup-divider" />
       <div className="popup-content">
-        <p>{content}</p>
+        {content}
       </div>
     </div>
   );
