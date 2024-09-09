@@ -33,6 +33,15 @@ const PopupsProvider: React.FC<PopupProps> = ({
   }));
 
   useEffect(() => {
+    /**
+      * Maneja el movimiento del mouse durante el arrastre del popup.
+      * 
+      * Esta función se ejecuta cuando el usuario mueve el mouse mientras está arrastrando el popup.
+      * Calcula la nueva posición del popup en función de la posición del mouse y las restricciones
+      * del área contenedora para evitar que el popup se mueva fuera de los límites visibles.
+      * 
+      * @param e - El evento del mouse que contiene la posición actual del cursor.
+      */
     const handleMouseMove = (e: MouseEvent) => {
       if (isDragging && popupRef.current && parentRef.current) {
         const parentRect = parentRef.current.getBoundingClientRect();
@@ -55,7 +64,17 @@ const PopupsProvider: React.FC<PopupProps> = ({
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     }
-
+    /**
+      * Función de limpieza "cleanup function" que elimina los manejadores de eventos cuando el componente se desmonta
+      * o el efecto de arrastre deja de ser necesario.
+      * 
+      * Esta función se asegura de que los eventos de `mousemove` y `mouseup` sean eliminados del
+      * documento para evitar fugas de memoria y evitar que las funciones de manejo de eventos se
+      * sigan ejecutando después de que el componente haya sido desmontado o el arrastre haya terminado.
+      * 
+      * Se llama automáticamente cuando el efecto asociado con `handleMouseMove` y `handleMouseUp`
+      * se limpia, por ejemplo, cuando el componente se desmonta o se detiene el arrastre.
+      */
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
